@@ -1,0 +1,16 @@
+button {
+    width: 100%;
+    margin: 2px;
+}
+
+input {
+    width: 100%;
+}
+
+#searchBtn {
+    margin-bottom: 10px;
+}
+
+img {
+    width: fit-content;
+}
