@@ -63,7 +63,7 @@ $(function() {
     function getAPI() {
         var city = JSON.parse(localStorage.getItem('city')).city;
 
-        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_key;
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_key;
         fetch(queryURL)
         .then(function (response) {
             return response.json();
@@ -100,7 +100,7 @@ $(function() {
                     var dateText = data.list[i].dt_txt;
                     var dayDate = $('<p></p>').text(dateText.split('').splice(0, 10).join(''));
                     var iconCode = data.list[i].weather[0].icon;
-                    var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                    var iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
                     var icon = $('<img src="">').attr('src', iconURL); 
                     var temp = $('<p></p>').text(data.list[i].main.temp + " °F");
                     var humid = $('<p></p>').text(data.list[i].main.humidity + "% humidity");
