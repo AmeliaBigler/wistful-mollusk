@@ -20,6 +20,7 @@ $(function() {
     
         renderSearchHistory();
         getAPI();
+        clearStorage();
     })
 
     function renderSearchHistory(){
@@ -40,6 +41,24 @@ $(function() {
             }
         } 
     }
+
+    // console.log($('#searchHistory').children.length);
+    // $('#searchHistory').children.forEach(function(element){
+    //     element.on('click', function(){
+    //         var city = {
+    //             city: this.value
+    //         };
+        
+    //         localStorage.setItem('city', JSON.stringify(city));
+
+    //         $('#forecast').empty();
+        
+    //         renderSearchHistory();
+    //         getAPI();
+    //         clearStorage(); 
+    //     })
+        
+    // });
 
     function getAPI() {
         var city = JSON.parse(localStorage.getItem('city')).city;
@@ -85,11 +104,17 @@ $(function() {
                     var temp = $('<p></p>').text(data.list[i].main.temp + " degrees Fahrenheit");
                     var humid = $('<p></p>').text(data.list[i].main.humidity + "%");
                     var wind = $('<p></p>').text(data.list[i].wind.speed + " mph");
-                    $('#forecast').append(dayDate, icon, temp, humid, wind);
+                    var dayCard = $('<div class="dayCard col-12 col-md-2"></div>').attr('id', i+'card')
+                    $('#forecast').append(dayCard);
+                    $('#'+i+'card').append(dayDate, icon, temp, humid, wind);
                 }
             }
         })
-    }    
+    } 
+    
+    function clearStorage(){
+        localStorage.setItem('city', JSON.stringify(null));
+    }
 
     function init(){
         renderSearchHistory();
