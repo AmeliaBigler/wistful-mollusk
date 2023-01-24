@@ -5,9 +5,9 @@ $(function() {
     var cityArray = [];
     var searchButton = $('#searchBtn');
 
-    if (!localStorage.getItem('cityArray')){
+    // if (!localStorage.getItem('cityArray')){
         localStorage.setItem('cityArray', JSON.stringify(cityArray));
-    }
+    // }
 
     searchButton.on('click', function(){
         var city = {
@@ -36,7 +36,7 @@ $(function() {
             var cityArray = JSON.parse(localStorage.getItem('cityArray'));
             $('#searchHistory').empty();
             for (var i = 0; i<cityArray.length; i++){
-              var searchHistory = $('<p></p>').text(cityArray[i].city);
+              var searchHistory = $('<button type="button" class="btn btn-secondary"></button>').text(cityArray[i].city);
               $('#searchHistory').append(searchHistory);
             }
         } 
@@ -75,9 +75,9 @@ $(function() {
             var iconCode = data.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
             var icon = $('<img src="">').attr('src', iconURL);
-            var temp = $('<p></p>').text(data.main.temp + " degrees Fahrenheit");
-            var humid = $('<p></p>').text(data.main.humidity + "%");
-            var wind = $('<p></p>').text(data.wind.speed + " mph");
+            var temp = $('<p></p>').text(data.main.temp + " °F");
+            var humid = $('<p></p>').text(data.main.humidity + "% humidity");
+            var wind = $('<p></p>').text(data.wind.speed + " mph wind");
             $('#current').append(cityName, icon, temp, humid, wind);
             
             var lat = data.coord.lat;
@@ -97,14 +97,15 @@ $(function() {
             console.log(data);
             for (var i = 0; i<data.list.length; i++) {
                 if (data.list[i].dt_txt.includes('12:00:00')){
-                    var dayDate = $('<p></p>').text(data.list[i].dt_txt);
+                    var dateText = data.list[i].dt_txt;
+                    var dayDate = $('<p></p>').text(dateText.split('').splice(0, 10).join(''));
                     var iconCode = data.list[i].weather[0].icon;
                     var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
                     var icon = $('<img src="">').attr('src', iconURL); 
-                    var temp = $('<p></p>').text(data.list[i].main.temp + " degrees Fahrenheit");
-                    var humid = $('<p></p>').text(data.list[i].main.humidity + "%");
-                    var wind = $('<p></p>').text(data.list[i].wind.speed + " mph");
-                    var dayCard = $('<div class="dayCard col-12 col-md-2"></div>').attr('id', i+'card')
+                    var temp = $('<p></p>').text(data.list[i].main.temp + " °F");
+                    var humid = $('<p></p>').text(data.list[i].main.humidity + "% humidity");
+                    var wind = $('<p></p>').text(data.list[i].wind.speed + " mph wind");
+                    var dayCard = $('<div class="dayCard col-12 col-md-2 card text-white bg-dark mb-3"></div>').attr('id', i+'card')
                     $('#forecast').append(dayCard);
                     $('#'+i+'card').append(dayDate, icon, temp, humid, wind);
                 }
