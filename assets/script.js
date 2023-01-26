@@ -5,9 +5,9 @@ $(function() {
     var cityArray = [];
     var searchButton = $('#searchBtn');
 
-    // if (!localStorage.getItem('cityArray')){
+    if (!localStorage.getItem('cityArray')){
         localStorage.setItem('cityArray', JSON.stringify(cityArray));
-    // }
+    }
 
     searchButton.on('click', function(){
         var city = {
@@ -19,7 +19,7 @@ $(function() {
         $('#forecast').empty();
     
         renderSearchHistory();
-        getAPI();
+        getCurrentAPI();
         clearStorage();
     })
 
@@ -54,13 +54,13 @@ $(function() {
     //         $('#forecast').empty();
         
     //         renderSearchHistory();
-    //         getAPI();
+    //         getCurrentAPI();
     //         clearStorage(); 
     //     })
         
     // });
 
-    function getAPI() {
+    function getCurrentAPI() {
         var city = JSON.parse(localStorage.getItem('city')).city;
 
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_key;
@@ -85,7 +85,10 @@ $(function() {
             localStorage.setItem('cityLat', JSON.stringify(lat));
             localStorage.setItem('cityLon', JSON.stringify(lon));
         })
+        getForecastAPI();
+    } 
 
+    function getForecastAPI() {
         var lat = JSON.parse(localStorage.getItem('cityLat'));
         var lon = JSON.parse(localStorage.getItem('cityLon'));
         var requestURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + API_key;
@@ -111,8 +114,8 @@ $(function() {
                 }
             }
         })
-    } 
-    
+    }
+
     function clearStorage(){
         localStorage.setItem('city', JSON.stringify(null));
     }
