@@ -42,24 +42,6 @@ $(function() {
         } 
     }
 
-    // console.log($('#searchHistory').children.length);
-    // $('#searchHistory').children.forEach(function(element){
-    //     element.on('click', function(){
-    //         var city = {
-    //             city: this.value
-    //         };
-        
-    //         localStorage.setItem('city', JSON.stringify(city));
-
-    //         $('#forecast').empty();
-        
-    //         renderSearchHistory();
-    //         getCurrentAPI();
-    //         clearStorage(); 
-    //     })
-        
-    // });
-
     function getCurrentAPI() {
         var city = JSON.parse(localStorage.getItem('city')).city;
 
@@ -84,8 +66,8 @@ $(function() {
             var lon = data.coord.lon;
             localStorage.setItem('cityLat', JSON.stringify(lat));
             localStorage.setItem('cityLon', JSON.stringify(lon));
+            getForecastAPI();
         })
-        getForecastAPI();
     } 
 
     function getForecastAPI() {
@@ -123,6 +105,29 @@ $(function() {
     function init(){
         renderSearchHistory();
     }
+
+    // console.log($('.btn-secondary'));
+    // console.log($('.btn-secondary'))
+    // var citiesSearched = $('#searchHistory')[0].children;
+    // var cityButtonArray = Array.from(citiesSearched);
+    // console.log(typeof(cityButtonArray));
+
+    // $('#searchHistory')[0].children.forEach(function(element){
+    //     element.on('click', function(){
+    //         var city = {
+    //             city: this.value
+    //         };
+        
+    //         localStorage.setItem('city', JSON.stringify(city));
+
+    //         $('#forecast').empty();
+        
+    //         renderSearchHistory();
+    //         getCurrentAPI();
+    //         clearStorage(); 
+    //     })
+        
+    // });
 
     init();
 })

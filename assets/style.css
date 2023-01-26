@@ -1,3 +1,12 @@
+header {
+    background-image: linear-gradient(to right, rgb(15, 76, 117), rgb(106, 33, 179));
+    color: white;
+}
+
+h1 {
+    width: fit-content;
+}
+
 button {
     width: 100%;
     margin: 2px;
